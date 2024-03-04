@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>API Data Table</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search...">
+        </div>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Facture ID</th>
+                    <th>Facture Date</th>
+                    <th>Client Nom</th>
+                    <th>Fournisseur Nom</th>
+                    <th>Montant TTC</th>
+                    <th>Action</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populate table rows dynamically using backend or JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    
+
+  <script src="main.js"></script>
+  <script type="text/javascript" src="jspdf.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+  function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+                var cell = td[j];
+                if (cell) {
+                    txtValue = cell.textContent || cell.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break; // Break the inner loop and move to the next row
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+  </script>
+</body>
+</html>
